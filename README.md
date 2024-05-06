@@ -16,6 +16,37 @@ Before running the script, ensure you have the following:
 - Reddit API credentials (client ID, client secret, user agent, username, and password).
 - Environment variables set up for Reddit API credentials and database connection details.
 
+You can create the table using the following code
+
+```sql
+CREATE TABLE reddit_comment_insights (
+    id VARCHAR(20) PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE,
+    body TEXT,
+    score INT,
+    replies INT,
+    url TEXT
+);
+
+CREATE TABLE reddit_submission_insights (
+    id VARCHAR(20) PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE,
+    title TEXT,
+    score INT,
+    comments INT,
+    subreddit TEXT,
+    url TEXT
+);
+
+CREATE TABLE reddit_karma_insights (
+    id TEXT PRIMARY KEY,
+    date DATE,
+    subreddit TEXT,
+    comment_karma INT,
+    link_karma INT
+);
+```
+
 ## Installation
 1. Clone this repository to your local machine.
 2. Install the required Python packages using `pip install -r requirements.txt`.
