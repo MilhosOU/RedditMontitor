@@ -16,6 +16,31 @@ Before running the script, ensure you have the following:
 - Reddit API credentials (client ID, client secret, user agent, username, and password).
 - Environment variables set up for Reddit API credentials and database connection details.
 
+## Installation
+1. Clone this repository to your local machine.
+2. Install the required Python packages using `pip install -r requirements.txt`.
+3. Set up environment variables for Reddit API credentials and database connection details.
+4. Ensure your PostgreSQL database is running and accessible.
+
+## Configuration
+You can configure the script by modifying the following environment variables:
+- `REDDIT_CLIENT_ID`: Your Reddit API client ID.
+- `REDDIT_CLIENT_SECRET`: Your Reddit API client secret.
+- `REDDIT_USER_AGENT`: Your Reddit API user agent.
+- `REDDIT_USERNAME`: Your Reddit username.
+- `REDDIT_PASSWORD`: Your Reddit password.
+- `DB_NAME`: Name of the PostgreSQL database.
+- `DB_USER`: PostgreSQL database username.
+- `DB_PASS`: PostgreSQL database password.
+- `DB_HOST`: PostgreSQL database host.
+- `DB_PORT`: PostgreSQL database port.
+
+## Database Schema
+The script requires the following tables in your PostgreSQL database:
+- `reddit_comment_insights`: Stores data about your Reddit comments.
+- `reddit_submission_insights`: Stores data about your Reddit submissions.
+- `reddit_karma_insights`: Stores data about your Reddit karma breakdown.
+
 You can create the table using the following code
 
 ```sql
@@ -47,34 +72,9 @@ CREATE TABLE reddit_karma_insights (
 );
 ```
 
-## Installation
-1. Clone this repository to your local machine.
-2. Install the required Python packages using `pip install -r requirements.txt`.
-3. Set up environment variables for Reddit API credentials and database connection details.
-4. Ensure your PostgreSQL database is running and accessible.
-
 ## Usage
 1. Navigate to the directory containing the script.
 2. Run the script using the command `python main.py`.
-
-## Configuration
-You can configure the script by modifying the following environment variables:
-- `REDDIT_CLIENT_ID`: Your Reddit API client ID.
-- `REDDIT_CLIENT_SECRET`: Your Reddit API client secret.
-- `REDDIT_USER_AGENT`: Your Reddit API user agent.
-- `REDDIT_USERNAME`: Your Reddit username.
-- `REDDIT_PASSWORD`: Your Reddit password.
-- `DB_NAME`: Name of the PostgreSQL database.
-- `DB_USER`: PostgreSQL database username.
-- `DB_PASS`: PostgreSQL database password.
-- `DB_HOST`: PostgreSQL database host.
-- `DB_PORT`: PostgreSQL database port.
-
-## Database Schema
-The script creates the following tables in your PostgreSQL database:
-- `reddit_comment_insights`: Stores data about your Reddit comments.
-- `reddit_submission_insights`: Stores data about your Reddit submissions.
-- `reddit_karma_insights`: Stores data about your Reddit karma breakdown.
 
 ## Logging
 The script logs its execution status to a table named `cron_job_log` in your PostgreSQL database. It records the job name, status (success/failure), error message (if any), and error traceback (if any).
