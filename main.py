@@ -82,7 +82,7 @@ def save_to_database(items, table_name, on_conflict):
     conn.commit()
     cursor.close()
 
-def log_cron_execution(self, job_name, status, error_message=None, error_traceback=None):
+def log_cron_execution(conn, job_name, status, error_message=None):
     query = """
         INSERT INTO cron_job_log (
             job_name, 
@@ -122,17 +122,11 @@ if __name__ == "__main__":
         host=db_host,
         port=db_port
     )
-    cursor = conn.cursor()
     try:
         main()
-        conn.commit()
-        cursor.close()
-        conn.close()
-        log_cron_execution("RedditMonitor", True)
+        log_cron_execution(conn, "RedditMonitor", True)
     except Exception as e:
         conn.rollback()
-        cursor.close()
-        conn.close()
-        log_cron_execution("RedditMonitor", False)
+        log_cron_execution(conn, "RedditMonitor", False, str(e))
     finally:
         conn.close()
