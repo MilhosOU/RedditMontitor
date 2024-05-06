@@ -87,14 +87,13 @@ def log_cron_execution(conn, job_name, status, error_message=None):
         INSERT INTO cron_job_log (
             job_name, 
             status, 
-            error_message, 
-            error_traceback
+            error_message
         )
-        VALUES (%s, %s, %s, %s)
+        VALUES (%s, %s, %s)
     """
-    with self.conn.cursor() as cursor:
-        cursor.execute(query, (job_name, status, error_message, error_traceback))
-        self.conn.commit()
+    with conn.cursor() as cursor:
+        cursor.execute(query, (job_name, status, error_message))
+        conn.commit()
 
 def main():
 
