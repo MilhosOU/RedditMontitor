@@ -53,7 +53,7 @@ def get_karma_data(reddit_client):
     karma = reddit_client.user.karma()
     for subreddit, karma_details in karma.items():
         karma_data.append({
-            "id": today + "_" + subreddit.id,
+            "id": today + "_" + str(subreddit),
             "date": today,
             "subreddit": subreddit.display_name,
             "comment_karma": karma_details['comment_karma'],
